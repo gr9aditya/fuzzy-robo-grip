@@ -70,6 +70,32 @@ confusion matrices, and a metric comparison chart under `results/figures/`.
 The curves are calculated from test scores; confusion matrices and metric
 values use the validation-selected thresholds recorded with the results.
 
+## Run the human evaluation survey
+
+The separate Streamlit app presents 20 balanced, blind examples from the
+same held-out test experiments. Participants classify each tactile example
+as slip, no slip, or not sure, and rate their confidence. Labels and both
+model predictions are only revealed after all answers are submitted.
+
+```bash
+python -m pip install -r requirements.txt
+python train_decision_tree.py
+streamlit run survey_app.py
+```
+
+Open the local URL printed by Streamlit. The app does not collect names or
+contact information. Completed responses are saved as one anonymous CSV per
+session under `results/survey_responses/`; the app shows the human/model
+comparison only after the survey is finished. These files are local to the
+machine running the app and should be handled as research data. The default
+survey is local-only; hosting it publicly requires a hosting service, persistent
+storage, and suitable participant/privacy information.
+
+Each survey uses the same fixed set of 20 held-out samples (10 per class) with
+their display order shuffled per participant. This balanced sample is useful
+for comparing slip and no-slip judgments, but its accuracy is not an estimate
+of performance at the dataset's natural slip frequency.
+
 Because slip labels are relatively rare, compare recall, precision, F1, and
 PR-AUC rather than relying on accuracy alone. The dataset was collected with a
 specific tactile sensor and robot setup; results do not directly transfer to a
