@@ -9,3 +9,4 @@ venv/
 !.env.example
 .DS_Store
 Thumbs.db
+/evaluation/data/slipDataset_SpoolSolder_tactile.h5
